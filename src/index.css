@@ -1,3 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold-primary: #d4af37;
+  --color-gold-hover: #e6c35c;
+  --color-gold-light: #f7ebd0;
+  --color-gold-dark: #9e7f20;
+  
+  --color-bg-primary: #07080a;
+  --color-bg-secondary: #0d0f14;
+  --color-bg-tertiary: #131720;
+  --color-bg-card: rgba(16, 20, 28, 0.72);
+  
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
 :root {
   /* Color Palette - Ultra Luxury Obsidian & Gold */
   --bg-primary: #07080a;
@@ -47,8 +64,6 @@
 
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 html {
@@ -108,34 +123,16 @@ h1, h2, h3, h4, .font-serif {
   color: var(--text-primary);
 }
 
-p {
-  color: var(--text-secondary);
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  background: none;
-  outline: none;
-}
-
-input, select, textarea {
-  font-family: inherit;
-  color: inherit;
-}
-
 /* Gold Gradient Text Utility */
 .gold-text {
   background: var(--gold-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
+}
+
+.text-gold {
+  color: var(--gold-primary);
 }
 
 /* Glassmorphism Classes */
