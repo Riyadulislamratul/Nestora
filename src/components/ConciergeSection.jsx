@@ -22,7 +22,7 @@ export default function ConciergeSection({ onOpenConsultation }) {
 
   return (
     <section id="concierge" className="py-10 sm:py-14">
-      <div className="p-6 sm:p-12 rounded-3xl glass-panel-gold border border-gold-primary/30 shadow-2xl">
+      <div className="p-6 sm:p-12 rounded-3xl glass-panel-gold border border-gold-primary/35 shadow-2xl">
         <div className="text-center max-w-2xl mx-auto mb-10">
           <span className="text-[11px] tracking-[0.22em] text-gold-primary font-bold uppercase block mb-1.5">
             BESPOKE CLIENT SERVICES
@@ -37,17 +37,17 @@ export default function ConciergeSection({ onOpenConsultation }) {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 mb-10">
           {pillars.map((pillar, idx) => (
-            <div key={idx} className="p-6 rounded-2xl glass-panel border border-white/10 hover:border-gold-primary/40 transition-all shadow-lg">
-              <div className="w-12 h-12 rounded-xl bg-gold-primary/10 border border-gold-primary/30 flex items-center justify-center mb-4">
+            <div key={idx} className="p-6 rounded-2xl glass-card border border-white/15 hover:border-gold-primary/50 transition-all shadow-xl">
+              <div className="w-12 h-12 rounded-2xl glass-pill-gold flex items-center justify-center mb-4 shadow-md shadow-gold-primary/20">
                 {pillar.icon}
               </div>
               <h3 className="font-serif text-lg text-white font-semibold mb-2">{pillar.title}</h3>
-              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">{pillar.description}</p>
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">{pillar.description}</p>
             </div>
           ))}
         </div>
 
-        <div className="bg-black/50 border border-white/10 rounded-2xl p-5 sm:p-7 flex flex-wrap items-center justify-between gap-4">
+        <div className="glass-panel border border-white/15 rounded-2xl p-5 sm:p-7 flex flex-wrap items-center justify-between gap-4 shadow-2xl">
           <div>
             <h4 className="font-serif text-base sm:text-lg text-white font-semibold mb-1">
               Seeking an off-market or unlisted trophy residence?
@@ -57,7 +57,7 @@ export default function ConciergeSection({ onOpenConsultation }) {
           <button 
             type="button" 
             onClick={onOpenConsultation}
-            className="inline-flex items-center gap-2 px-6 py-3 gold-gradient text-[#07080a] text-xs sm:text-sm font-bold uppercase tracking-wider rounded-lg shadow-md shadow-gold-primary/30 hover:brightness-110 transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 px-6 py-3 gold-gradient text-[#07080a] text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl shadow-lg shadow-gold-primary/30 hover:brightness-110 transition-all cursor-pointer border border-white/20"
           >
             <span>Request Private Counsel</span>
             <ArrowRight size={16} />

@@ -33,8 +33,8 @@ export default function StatsSection() {
     <section id="stats" className="py-10 sm:py-14">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {stats.map((stat, idx) => (
-          <div key={idx} className="p-6 sm:p-7 rounded-2xl glass-panel border border-white/10 hover:border-gold-primary/40 flex flex-col items-center text-center transition-all hover:-translate-y-1 shadow-xl">
-            <div className="w-12 h-12 rounded-xl bg-gold-primary/10 border border-gold-primary/30 flex items-center justify-center mb-4 shadow-sm shadow-gold-primary/10">
+          <div key={idx} className="p-6 sm:p-7 rounded-3xl glass-card border border-white/15 hover:border-gold-primary/50 flex flex-col items-center text-center transition-all hover:-translate-y-2 shadow-2xl">
+            <div className="w-12 h-12 rounded-2xl glass-pill-gold flex items-center justify-center mb-4 shadow-md shadow-gold-primary/20">
               {stat.icon}
             </div>
             <div className="font-serif text-3xl sm:text-4xl font-bold gold-text mb-1.5">{stat.value}</div>

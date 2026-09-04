@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Calculator, DollarSign, Percent, Calendar, ShieldCheck, CheckCircle } from 'lucide-react';
+import { X, Calculator } from 'lucide-react';
 
 export default function MortgageCalculator({ 
   property, 
@@ -61,13 +61,13 @@ export default function MortgageCalculator({
   const hoaPercent = totalMonthlyOutlay > 0 ? (monthlyHoa / totalMonthlyOutlay) * 100 : 0;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto animate-fade-in" onClick={onClose}>
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 overflow-y-auto animate-fade-in" onClick={onClose}>
       <div 
-        className="max-w-4xl w-full rounded-2xl glass-panel border border-gold-primary/30 shadow-2xl overflow-hidden animate-slide-up"
+        className="max-w-4xl w-full rounded-3xl glass-panel-gold border border-gold-primary/40 shadow-2xl overflow-hidden animate-slide-up"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 bg-[#0a0c11]/90">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 glass-panel !border-t-0 !border-x-0">
           <div className="flex items-center gap-2 text-sm font-semibold text-white">
             <Calculator size={18} className="text-gold-primary" />
             <span>Private Client Financing Analytics</span>
@@ -75,15 +75,15 @@ export default function MortgageCalculator({
           <button 
             type="button" 
             onClick={onClose} 
-            className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 text-zinc-300 hover:text-white flex items-center justify-center transition-all cursor-pointer"
+            className="w-8 h-8 rounded-full glass-btn text-zinc-300 hover:text-white flex items-center justify-center transition-all cursor-pointer"
             aria-label="Close"
           >
-            <X size={18} />
+            <X size={17} />
           </button>
         </div>
 
         {property && (
-          <div className="flex items-center gap-3 px-5 py-3 border-b border-white/10 glass-panel-gold text-xs sm:text-sm">
+          <div className="flex items-center gap-3 px-6 py-3 border-b border-white/10 glass-pill !rounded-none text-xs sm:text-sm">
             <span className="text-zinc-400">Selected Residence:</span>
             <span className="font-semibold text-white truncate">{property.title}</span>
             <span className="font-serif text-[#e2c057] font-semibold ml-auto">{formatCurrency(property.price)}</span>
@@ -121,10 +121,10 @@ export default function MortgageCalculator({
                   <button
                     key={pct}
                     type="button"
-                    className={`px-3 py-1.5 rounded-md border text-xs font-semibold transition-all cursor-pointer ${
+                    className={`px-3.5 py-1.5 rounded-xl border text-xs font-semibold transition-all cursor-pointer ${
                       downPaymentPercent === pct 
-                        ? 'bg-gold-primary/20 border-gold-primary text-gold-primary' 
-                        : 'bg-black/60 border-white/10 text-zinc-400 hover:text-white'
+                        ? 'glass-pill-gold text-gold-primary font-bold shadow-md shadow-gold-primary/20' 
+                        : 'glass-input text-zinc-400 hover:text-white'
                     }`}
                     onClick={() => setDownPaymentPercent(pct)}
                   >
@@ -140,10 +140,10 @@ export default function MortgageCalculator({
               <div className="grid grid-cols-2 gap-2.5">
                 <button
                   type="button"
-                  className={`p-2 rounded-lg border text-xs font-semibold transition-all cursor-pointer text-center ${
+                  className={`p-2.5 rounded-xl border text-xs font-semibold transition-all cursor-pointer text-center ${
                     loanTermYears === 30 
-                      ? 'bg-gold-primary/20 border-gold-primary text-gold-primary' 
-                      : 'bg-black/60 border-white/10 text-zinc-400 hover:text-white'
+                      ? 'glass-pill-gold text-gold-primary font-bold shadow-md shadow-gold-primary/20' 
+                      : 'glass-input text-zinc-400 hover:text-white'
                   }`}
                   onClick={() => setLoanTermYears(30)}
                 >
@@ -151,10 +151,10 @@ export default function MortgageCalculator({
                 </button>
                 <button
                   type="button"
-                  className={`p-2 rounded-lg border text-xs font-semibold transition-all cursor-pointer text-center ${
+                  className={`p-2.5 rounded-xl border text-xs font-semibold transition-all cursor-pointer text-center ${
                     loanTermYears === 15 
-                      ? 'bg-gold-primary/20 border-gold-primary text-gold-primary' 
-                      : 'bg-black/60 border-white/10 text-zinc-400 hover:text-white'
+                      ? 'glass-pill-gold text-gold-primary font-bold shadow-md shadow-gold-primary/20' 
+                      : 'glass-input text-zinc-400 hover:text-white'
                   }`}
                   onClick={() => setLoanTermYears(15)}
                 >
@@ -198,8 +198,8 @@ export default function MortgageCalculator({
             </div>
           </div>
 
-          {/* Results Summary Column */}
-          <div className="lg:col-span-2 p-5 sm:p-6 rounded-2xl glass-panel-gold border border-gold-primary/30 flex flex-col justify-between">
+          {/* Results Summary Column in Glass */}
+          <div className="lg:col-span-2 p-5 sm:p-6 rounded-3xl glass-card border border-gold-primary/35 flex flex-col justify-between shadow-2xl">
             <div>
               <span className="text-[10px] tracking-widest text-zinc-400 uppercase block mb-1">
                 ESTIMATED MONTHLY OUTLAY
@@ -210,16 +210,16 @@ export default function MortgageCalculator({
               </div>
 
               {/* Visual Breakdown Bar */}
-              <div className="flex h-2.5 rounded-full overflow-hidden mb-5 bg-white/5">
+              <div className="flex h-2.5 rounded-full overflow-hidden mb-5 bg-white/5 border border-white/10">
                 <div className="bg-[#d4af37] transition-all duration-300" style={{ width: `${piPercent}%` }} title="Principal & Interest"></div>
                 <div className="bg-blue-500 transition-all duration-300" style={{ width: `${taxPercent}%` }} title="Property Taxes"></div>
                 <div className="bg-emerald-500 transition-all duration-300" style={{ width: `${insPercent}%` }} title="Insurance"></div>
                 <div className="bg-purple-500 transition-all duration-300" style={{ width: `${hoaPercent}%` }} title="HOA & Concierge"></div>
               </div>
 
-              {/* Itemized Legend */}
+              {/* Itemized Legend in Glass */}
               <div className="flex flex-col gap-2.5 text-xs text-zinc-300 mb-5">
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center glass-pill px-3 py-1.5 rounded-xl">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-[#d4af37]"></span>
                     <span>Principal & Interest</span>
@@ -227,7 +227,7 @@ export default function MortgageCalculator({
                   <span className="font-semibold text-white">{formatCurrency(Math.round(monthlyPrincipalInterest))}</span>
                 </div>
 
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center glass-pill px-3 py-1.5 rounded-xl">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-blue-500"></span>
                     <span>Property Taxes</span>
@@ -235,7 +235,7 @@ export default function MortgageCalculator({
                   <span className="font-semibold text-white">{formatCurrency(Math.round(monthlyPropertyTax))}</span>
                 </div>
 
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center glass-pill px-3 py-1.5 rounded-xl">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
                     <span>Home Insurance</span>
@@ -243,7 +243,7 @@ export default function MortgageCalculator({
                   <span className="font-semibold text-white">{formatCurrency(Math.round(monthlyInsurance))}</span>
                 </div>
 
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center glass-pill px-3 py-1.5 rounded-xl">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-purple-500"></span>
                     <span>HOA & Reserve</span>
@@ -253,7 +253,7 @@ export default function MortgageCalculator({
               </div>
 
               {/* Loan Total Specs */}
-              <div className="p-3 bg-black/40 border border-white/10 rounded-xl flex flex-col gap-1.5 text-xs mb-5">
+              <div className="p-3.5 glass-input rounded-2xl flex flex-col gap-1.5 text-xs mb-5">
                 <div className="flex justify-between text-zinc-400">
                   <span>Jumbo Loan Principal:</span>
                   <strong className="text-white">{formatCurrency(loanAmount)}</strong>
@@ -271,7 +271,7 @@ export default function MortgageCalculator({
                 onClose();
                 onOpenConsultation();
               }}
-              className="w-full py-3 gold-gradient text-[#07080a] text-xs font-bold uppercase tracking-wider rounded-lg shadow-md shadow-gold-primary/20 hover:brightness-110 cursor-pointer"
+              className="w-full py-3 gold-gradient text-[#07080a] text-xs font-bold uppercase tracking-wider rounded-xl shadow-lg shadow-gold-primary/25 hover:brightness-110 cursor-pointer border border-white/20"
             >
               Consult Private Wealth Advisor
             </button>
