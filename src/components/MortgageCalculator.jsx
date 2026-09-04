@@ -61,43 +61,43 @@ export default function MortgageCalculator({
   const hoaPercent = totalMonthlyOutlay > 0 ? (monthlyHoa / totalMonthlyOutlay) * 100 : 0;
 
   return (
-    <div className="modal-backdrop animate-fade-in" onClick={onClose}>
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto animate-fade-in" onClick={onClose}>
       <div 
-        className="calculator-modal-container glass-panel animate-slide-up"
+        className="max-w-4xl w-full rounded-2xl glass-panel border border-gold-primary/30 shadow-2xl overflow-hidden animate-slide-up"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="modal-header-bar">
-          <div className="modal-header-title">
-            <Calculator size={20} className="text-gold mr-2" />
-            <span>Private Client Financing & Mortgage Analytics</span>
+        <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 bg-[#0a0c11]/90">
+          <div className="flex items-center gap-2 text-sm font-semibold text-white">
+            <Calculator size={18} className="text-gold-primary" />
+            <span>Private Client Financing Analytics</span>
           </div>
           <button 
             type="button" 
             onClick={onClose} 
-            className="modal-close-btn"
+            className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 text-zinc-300 hover:text-white flex items-center justify-center transition-all cursor-pointer"
             aria-label="Close"
           >
-            <X size={20} />
+            <X size={18} />
           </button>
         </div>
 
         {property && (
-          <div className="calc-property-target glass-panel-gold">
-            <span className="calc-target-label">Selected Residence:</span>
-            <span className="calc-target-name">{property.title}</span>
-            <span className="calc-target-price">{formatCurrency(property.price)}</span>
+          <div className="flex items-center gap-3 px-5 py-3 border-b border-white/10 glass-panel-gold text-xs sm:text-sm">
+            <span className="text-zinc-400">Selected Residence:</span>
+            <span className="font-semibold text-white truncate">{property.title}</span>
+            <span className="font-serif text-[#e2c057] font-semibold ml-auto">{formatCurrency(property.price)}</span>
           </div>
         )}
 
-        <div className="calculator-layout-grid">
+        <div className="grid grid-cols-1 lg:grid-cols-5 p-5 sm:p-7 gap-6 sm:gap-8">
           {/* Controls Column */}
-          <div className="calculator-inputs-col">
+          <div className="lg:col-span-3 flex flex-col gap-4">
             {/* Home Price */}
-            <div className="calc-group">
-              <div className="calc-label-row">
-                <label className="calc-label">Acquisition Price</label>
-                <span className="calc-value-display">{formatCurrency(homePrice)}</span>
+            <div className="flex flex-col gap-1.5">
+              <div className="flex justify-between items-baseline">
+                <label className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Acquisition Price</label>
+                <span className="text-xs font-bold text-gold-primary">{formatCurrency(homePrice)}</span>
               </div>
               <input 
                 type="range"
@@ -106,22 +106,26 @@ export default function MortgageCalculator({
                 step="500000"
                 value={homePrice}
                 onChange={(e) => setHomePrice(Number(e.target.value))}
-                className="custom-range"
+                className="w-full accent-gold-primary cursor-pointer"
               />
             </div>
 
             {/* Down Payment */}
-            <div className="calc-group">
-              <div className="calc-label-row">
-                <label className="calc-label">Down Payment ({downPaymentPercent}%)</label>
-                <span className="calc-value-display">{formatCurrency(downPaymentAmount)}</span>
+            <div className="flex flex-col gap-1.5">
+              <div className="flex justify-between items-baseline">
+                <label className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Down Payment ({downPaymentPercent}%)</label>
+                <span className="text-xs font-bold text-gold-primary">{formatCurrency(downPaymentAmount)}</span>
               </div>
-              <div className="pill-group">
+              <div className="flex gap-2 flex-wrap">
                 {[15, 20, 25, 30, 40, 50].map((pct) => (
                   <button
                     key={pct}
                     type="button"
-                    className={`calc-pill-btn ${downPaymentPercent === pct ? 'active' : ''}`}
+                    className={`px-3 py-1.5 rounded-md border text-xs font-semibold transition-all cursor-pointer ${
+                      downPaymentPercent === pct 
+                        ? 'bg-gold-primary/20 border-gold-primary text-gold-primary' 
+                        : 'bg-black/60 border-white/10 text-zinc-400 hover:text-white'
+                    }`}
                     onClick={() => setDownPaymentPercent(pct)}
                   >
                     {pct}%
@@ -131,31 +135,39 @@ export default function MortgageCalculator({
             </div>
 
             {/* Loan Term */}
-            <div className="calc-group">
-              <label className="calc-label">Loan Term</label>
-              <div className="term-toggle">
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Loan Term</label>
+              <div className="grid grid-cols-2 gap-2.5">
                 <button
                   type="button"
-                  className={`term-btn ${loanTermYears === 30 ? 'active' : ''}`}
+                  className={`p-2 rounded-lg border text-xs font-semibold transition-all cursor-pointer text-center ${
+                    loanTermYears === 30 
+                      ? 'bg-gold-primary/20 border-gold-primary text-gold-primary' 
+                      : 'bg-black/60 border-white/10 text-zinc-400 hover:text-white'
+                  }`}
                   onClick={() => setLoanTermYears(30)}
                 >
-                  30-Year Fixed (Jumbo Prime)
+                  30-Year Fixed (Jumbo)
                 </button>
                 <button
                   type="button"
-                  className={`term-btn ${loanTermYears === 15 ? 'active' : ''}`}
+                  className={`p-2 rounded-lg border text-xs font-semibold transition-all cursor-pointer text-center ${
+                    loanTermYears === 15 
+                      ? 'bg-gold-primary/20 border-gold-primary text-gold-primary' 
+                      : 'bg-black/60 border-white/10 text-zinc-400 hover:text-white'
+                  }`}
                   onClick={() => setLoanTermYears(15)}
                 >
-                  15-Year Fixed (Accelerated)
+                  15-Year Accelerated
                 </button>
               </div>
             </div>
 
             {/* Interest Rate */}
-            <div className="calc-group">
-              <div className="calc-label-row">
-                <label className="calc-label">Annual Interest Rate</label>
-                <span className="calc-value-display">{interestRate.toFixed(2)}%</span>
+            <div className="flex flex-col gap-1.5">
+              <div className="flex justify-between items-baseline">
+                <label className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Annual Interest Rate</label>
+                <span className="text-xs font-bold text-gold-primary">{interestRate.toFixed(2)}%</span>
               </div>
               <input 
                 type="range"
@@ -164,15 +176,15 @@ export default function MortgageCalculator({
                 step="0.1"
                 value={interestRate}
                 onChange={(e) => setInterestRate(Number(e.target.value))}
-                className="custom-range"
+                className="w-full accent-gold-primary cursor-pointer"
               />
             </div>
 
             {/* Property Tax Rate */}
-            <div className="calc-group">
-              <div className="calc-label-row">
-                <label className="calc-label">Estimated Property Tax Rate</label>
-                <span className="calc-value-display">{propertyTaxRate.toFixed(2)}% / yr</span>
+            <div className="flex flex-col gap-1.5">
+              <div className="flex justify-between items-baseline">
+                <label className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Estimated Property Tax</label>
+                <span className="text-xs font-bold text-gold-primary">{propertyTaxRate.toFixed(2)}% / yr</span>
               </div>
               <input 
                 type="range"
@@ -181,71 +193,75 @@ export default function MortgageCalculator({
                 step="0.05"
                 value={propertyTaxRate}
                 onChange={(e) => setPropertyTaxRate(Number(e.target.value))}
-                className="custom-range"
+                className="w-full accent-gold-primary cursor-pointer"
               />
             </div>
           </div>
 
           {/* Results Summary Column */}
-          <div className="calculator-results-col glass-panel-gold">
-            <span className="monthly-outlay-eyebrow">ESTIMATED MONTHLY OUTLAY</span>
-            <div className="total-outlay-number">
-              {formatCurrency(totalMonthlyOutlay)}
-              <span className="outlay-freq">/ month</span>
-            </div>
+          <div className="lg:col-span-2 p-5 sm:p-6 rounded-2xl glass-panel-gold border border-gold-primary/30 flex flex-col justify-between">
+            <div>
+              <span className="text-[10px] tracking-widest text-zinc-400 uppercase block mb-1">
+                ESTIMATED MONTHLY OUTLAY
+              </span>
+              <div className="font-serif text-3xl sm:text-4xl font-bold text-[#e2c057] leading-none mb-4">
+                {formatCurrency(totalMonthlyOutlay)}
+                <span className="text-xs text-zinc-400 font-sans font-normal ml-1.5">/ month</span>
+              </div>
 
-            {/* Visual Breakdown Bar */}
-            <div className="outlay-bar-container">
-              <div className="bar-segment bar-pi" style={{ width: `${piPercent}%` }} title="Principal & Interest"></div>
-              <div className="bar-segment bar-tax" style={{ width: `${taxPercent}%` }} title="Property Taxes"></div>
-              <div className="bar-segment bar-ins" style={{ width: `${insPercent}%` }} title="Homeowners Insurance"></div>
-              <div className="bar-segment bar-hoa" style={{ width: `${hoaPercent}%` }} title="HOA & Concierge Reserve"></div>
-            </div>
+              {/* Visual Breakdown Bar */}
+              <div className="flex h-2.5 rounded-full overflow-hidden mb-5 bg-white/5">
+                <div className="bg-[#d4af37] transition-all duration-300" style={{ width: `${piPercent}%` }} title="Principal & Interest"></div>
+                <div className="bg-blue-500 transition-all duration-300" style={{ width: `${taxPercent}%` }} title="Property Taxes"></div>
+                <div className="bg-emerald-500 transition-all duration-300" style={{ width: `${insPercent}%` }} title="Insurance"></div>
+                <div className="bg-purple-500 transition-all duration-300" style={{ width: `${hoaPercent}%` }} title="HOA & Concierge"></div>
+              </div>
 
-            {/* Itemized Legend */}
-            <div className="outlay-breakdown-list">
-              <div className="outlay-item">
-                <div className="outlay-item-left">
-                  <span className="legend-dot dot-pi"></span>
-                  <span>Principal & Interest</span>
+              {/* Itemized Legend */}
+              <div className="flex flex-col gap-2.5 text-xs text-zinc-300 mb-5">
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#d4af37]"></span>
+                    <span>Principal & Interest</span>
+                  </div>
+                  <span className="font-semibold text-white">{formatCurrency(Math.round(monthlyPrincipalInterest))}</span>
                 </div>
-                <span className="outlay-val">{formatCurrency(Math.round(monthlyPrincipalInterest))}</span>
-              </div>
 
-              <div className="outlay-item">
-                <div className="outlay-item-left">
-                  <span className="legend-dot dot-tax"></span>
-                  <span>Property Taxes</span>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                    <span>Property Taxes</span>
+                  </div>
+                  <span className="font-semibold text-white">{formatCurrency(Math.round(monthlyPropertyTax))}</span>
                 </div>
-                <span className="outlay-val">{formatCurrency(Math.round(monthlyPropertyTax))}</span>
-              </div>
 
-              <div className="outlay-item">
-                <div className="outlay-item-left">
-                  <span className="legend-dot dot-ins"></span>
-                  <span>Homeowners Insurance</span>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span>Home Insurance</span>
+                  </div>
+                  <span className="font-semibold text-white">{formatCurrency(Math.round(monthlyInsurance))}</span>
                 </div>
-                <span className="outlay-val">{formatCurrency(Math.round(monthlyInsurance))}</span>
-              </div>
 
-              <div className="outlay-item">
-                <div className="outlay-item-left">
-                  <span className="legend-dot dot-hoa"></span>
-                  <span>HOA & Estate Maintenance</span>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-purple-500"></span>
+                    <span>HOA & Reserve</span>
+                  </div>
+                  <span className="font-semibold text-white">{formatCurrency(Math.round(monthlyHoa))}</span>
                 </div>
-                <span className="outlay-val">{formatCurrency(Math.round(monthlyHoa))}</span>
               </div>
-            </div>
 
-            {/* Loan Total Specs */}
-            <div className="loan-specs-box">
-              <div className="loan-spec-row">
-                <span>Borrowed Jumbo Amount:</span>
-                <strong>{formatCurrency(loanAmount)}</strong>
-              </div>
-              <div className="loan-spec-row">
-                <span>Initial Capital Required:</span>
-                <strong>{formatCurrency(downPaymentAmount)}</strong>
+              {/* Loan Total Specs */}
+              <div className="p-3 bg-black/40 border border-white/10 rounded-xl flex flex-col gap-1.5 text-xs mb-5">
+                <div className="flex justify-between text-zinc-400">
+                  <span>Jumbo Loan Principal:</span>
+                  <strong className="text-white">{formatCurrency(loanAmount)}</strong>
+                </div>
+                <div className="flex justify-between text-zinc-400">
+                  <span>Initial Capital Outlay:</span>
+                  <strong className="text-white">{formatCurrency(downPaymentAmount)}</strong>
+                </div>
               </div>
             </div>
 
@@ -255,7 +271,7 @@ export default function MortgageCalculator({
                 onClose();
                 onOpenConsultation();
               }}
-              className="btn-gold-full"
+              className="w-full py-3 gold-gradient text-[#07080a] text-xs font-bold uppercase tracking-wider rounded-lg shadow-md shadow-gold-primary/20 hover:brightness-110 cursor-pointer"
             >
               Consult Private Wealth Advisor
             </button>
