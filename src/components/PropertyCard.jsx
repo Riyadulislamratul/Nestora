@@ -15,7 +15,7 @@ export default function PropertyCard({
   }).format(property.status === 'For Rent' && property.monthlyRent ? property.monthlyRent : property.price);
 
   return (
-    <article className="group relative rounded-2xl overflow-hidden flex flex-col glass-panel border border-white/10 hover:border-gold-primary/50 transition-all duration-300 hover:-translate-y-1.5 shadow-xl hover:shadow-2xl hover:shadow-black/70">
+    <article className="group relative rounded-3xl overflow-hidden flex flex-col glass-card border border-white/15 hover:border-gold-primary/60 transition-all duration-500 hover:-translate-y-2 shadow-2xl">
       {/* Image Container */}
       <div 
         className="relative aspect-[16/10] overflow-hidden cursor-pointer"
@@ -31,18 +31,18 @@ export default function PropertyCard({
           loading="lazy"
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#060709] via-transparent to-black/30"></div>
 
         {/* Top Badges */}
         <div className="absolute top-3.5 left-3.5 flex gap-2">
-          <span className={`px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase ${
+          <span className={`px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase ${
             property.badge === 'Exclusive' 
-              ? 'gold-gradient text-[#07080a]' 
-              : 'bg-black/75 backdrop-blur-md text-white border border-white/10'
+              ? 'glass-pill-gold text-gold-primary font-bold shadow-md shadow-gold-primary/30' 
+              : 'glass-pill text-white'
           }`}>
             {property.badge}
           </span>
-          <span className="px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase bg-black/60 backdrop-blur-md text-zinc-300 border border-white/10">
+          <span className="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase glass-pill text-zinc-300">
             {property.status}
           </span>
         </div>
@@ -54,21 +54,21 @@ export default function PropertyCard({
             e.stopPropagation();
             onToggleSave(property.id);
           }}
-          className={`absolute top-3.5 right-3.5 w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-md border transition-all cursor-pointer ${
+          className={`absolute top-3.5 right-3.5 w-10 h-10 rounded-full flex items-center justify-center transition-all cursor-pointer ${
             isSaved 
-              ? 'bg-gold-primary text-[#07080a] border-gold-primary shadow-md shadow-gold-primary/50' 
-              : 'bg-black/60 text-white border-white/10 hover:bg-gold-primary hover:text-[#07080a] hover:border-gold-primary'
+              ? 'bg-gold-primary text-[#07080a] border border-gold-primary shadow-lg shadow-gold-primary/60' 
+              : 'glass-btn text-white hover:text-gold-primary'
           }`}
           aria-label={isSaved ? "Remove from saved properties" : "Save property"}
           title={isSaved ? "Remove from saved properties" : "Save to wishlist"}
         >
-          <Bookmark size={16} fill={isSaved ? "currentColor" : "none"} />
+          <Bookmark size={17} fill={isSaved ? "currentColor" : "none"} />
         </button>
 
         {/* Quick View Hover Hint */}
-        <div className="absolute bottom-3.5 right-3.5 flex items-center gap-1 text-[11px] font-semibold text-white bg-black/75 backdrop-blur-md px-2.5 py-1 rounded border border-white/10 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all">
+        <div className="absolute bottom-3.5 right-3.5 flex items-center gap-1.5 text-[11px] font-semibold text-white glass-pill px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all shadow-lg">
           <span>View Estate</span>
-          <ArrowUpRight size={14} />
+          <ArrowUpRight size={14} className="text-gold-primary" />
         </div>
       </div>
 
@@ -81,17 +81,17 @@ export default function PropertyCard({
               {formattedPrice}
             </span>
             {property.status === 'For Rent' && (
-              <span className="text-xs text-zinc-400">/mo</span>
+              <span className="text-xs text-zinc-400 font-sans">/mo</span>
             )}
           </div>
 
           <button 
             type="button" 
             onClick={() => onCalculateMortgage(property)}
-            className="flex items-center gap-1.5 text-[11px] text-zinc-400 hover:text-gold-primary px-2.5 py-1 rounded bg-white/5 border border-white/10 hover:border-gold-primary/40 transition-all cursor-pointer"
+            className="flex items-center gap-1.5 text-[11px] text-zinc-300 hover:text-gold-primary px-3 py-1 rounded-full glass-btn transition-all cursor-pointer"
             title="Calculate estimated monthly mortgage"
           >
-            <Calculator size={13} />
+            <Calculator size={13} className="text-gold-primary" />
             <span>Financing</span>
           </button>
         </div>
@@ -113,7 +113,7 @@ export default function PropertyCard({
           {property.subtitle}
         </p>
 
-        {/* Specs Bar: Bed, Bath, Sqft */}
+        {/* Specs Bar: Bed, Bath, Sqft with Glass Styling */}
         <div className="mt-auto pt-3.5 border-t border-white/10 flex items-center justify-between text-xs text-zinc-300">
           <div className="flex items-center gap-1.5" title={`${property.bedrooms} Bedrooms`}>
             <Bed size={14} className="text-gold-primary" />

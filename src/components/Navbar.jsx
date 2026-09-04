@@ -21,13 +21,13 @@ export default function Navbar({
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled 
-        ? 'bg-[#0a0c11]/90 backdrop-blur-xl border-b border-white/10 py-3.5 shadow-2xl' 
-        : 'bg-gradient-to-b from-[#07080a]/90 to-transparent py-5 sm:py-6'
+        ? 'glass-panel !bg-[#07090e]/75 !border-b !border-white/10 py-3 shadow-[0_12px_32px_rgba(0,0,0,0.65)]' 
+        : 'bg-gradient-to-b from-[#060709]/90 to-transparent py-5 sm:py-6'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between">
         {/* Brand Logo */}
         <a href="#" className="flex items-center gap-3.5 group cursor-pointer" aria-label="Nestora Luxury Real Estate">
-          <span className="w-9 h-9 rounded-lg gold-gradient text-[#07080a] flex items-center justify-center font-serif font-bold text-xl shadow-lg shadow-gold-primary/20 transition-transform group-hover:scale-105">
+          <span className="w-9 h-9 rounded-lg gold-gradient text-[#07080a] flex items-center justify-center font-serif font-bold text-xl shadow-lg shadow-gold-primary/25 transition-transform group-hover:scale-105 border border-white/20">
             N
           </span>
           <div className="flex flex-col">
@@ -41,23 +41,23 @@ export default function Navbar({
         </a>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8">
-          <a href="#featured-listings" className="text-xs uppercase tracking-widest text-zinc-300 hover:text-gold-primary transition-colors font-medium">
+        <nav className="hidden md:flex items-center gap-2 glass-pill px-5 py-2 rounded-full border border-white/10 shadow-lg">
+          <a href="#featured-listings" className="text-xs uppercase tracking-widest text-zinc-300 hover:text-gold-primary px-3 py-1 rounded-full transition-colors font-medium">
             Properties
           </a>
-          <a href="#concierge" className="text-xs uppercase tracking-widest text-zinc-300 hover:text-gold-primary transition-colors font-medium">
+          <a href="#concierge" className="text-xs uppercase tracking-widest text-zinc-300 hover:text-gold-primary px-3 py-1 rounded-full transition-colors font-medium">
             Private Office
           </a>
-          <a href="#stats" className="text-xs uppercase tracking-widest text-zinc-300 hover:text-gold-primary transition-colors font-medium">
-            Market Intelligence
+          <a href="#stats" className="text-xs uppercase tracking-widest text-zinc-300 hover:text-gold-primary px-3 py-1 rounded-full transition-colors font-medium">
+            Market Intel
           </a>
           <button 
             type="button"
             onClick={onOpenMortgage} 
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white/5 border border-white/10 hover:border-gold-primary/50 hover:bg-gold-primary/10 text-xs uppercase tracking-wider text-zinc-300 hover:text-gold-primary transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-primary/10 border border-gold-primary/30 hover:border-gold-primary hover:bg-gold-primary/20 text-xs uppercase tracking-wider text-gold-light hover:text-gold-primary transition-all cursor-pointer shadow-sm shadow-gold-primary/10"
             title="Open Financing Calculator"
           >
-            <Calculator size={14} className="text-gold-primary" />
+            <Calculator size={13} className="text-gold-primary" />
             <span>Financing</span>
           </button>
         </nav>
@@ -68,13 +68,13 @@ export default function Navbar({
           <button 
             type="button"
             onClick={onOpenWishlist} 
-            className="relative w-10 h-10 rounded-full flex items-center justify-center text-white bg-white/5 border border-white/10 hover:border-gold-primary/50 hover:bg-gold-primary/15 hover:text-gold-primary transition-all cursor-pointer" 
+            className="relative w-10 h-10 rounded-full flex items-center justify-center text-white glass-btn transition-all cursor-pointer" 
             title="View Saved Residences"
             aria-label="View Saved Residences"
           >
-            <Bookmark size={18} />
+            <Bookmark size={17} />
             {savedCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-gold-primary text-[#07080a] text-[10px] font-bold w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-md shadow-gold-primary/60">
+              <span className="absolute -top-1 -right-1 bg-gold-primary text-[#07080a] text-[10px] font-bold w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-md shadow-gold-primary/60 border border-white/30">
                 {savedCount}
               </span>
             )}
@@ -84,45 +84,45 @@ export default function Navbar({
           <button 
             type="button"
             onClick={onOpenConsultation}
-            className="hidden sm:flex items-center gap-2 px-5 py-2.5 gold-gradient text-[#0a0c10] text-xs font-bold uppercase tracking-wider rounded-md hover:brightness-110 hover:-translate-y-0.5 transition-all shadow-md shadow-gold-primary/25 cursor-pointer"
+            className="hidden sm:flex items-center gap-2 px-5 py-2.5 gold-gradient text-[#0a0c10] text-xs font-bold uppercase tracking-wider rounded-full hover:brightness-110 hover:-translate-y-0.5 transition-all shadow-md shadow-gold-primary/25 cursor-pointer border border-white/25"
           >
-            <PhoneCall size={14} />
+            <PhoneCall size={13} />
             <span>Inquire</span>
           </button>
 
           {/* Mobile Menu Trigger */}
           <button 
             type="button"
-            className="md:hidden p-2 text-zinc-300 hover:text-white cursor-pointer" 
+            className="md:hidden p-2 text-zinc-300 hover:text-white cursor-pointer glass-btn rounded-lg" 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle Navigation Menu"
           >
-            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden mx-4 mt-3 p-5 rounded-xl glass-panel flex flex-col gap-3 shadow-2xl animate-fade-in border border-white/10">
+        <div className="md:hidden mx-4 mt-3 p-5 rounded-2xl glass-panel flex flex-col gap-3 shadow-2xl animate-fade-in border border-white/15">
           <a 
             href="#featured-listings" 
             onClick={() => setMobileMenuOpen(false)}
-            className="text-sm uppercase tracking-wider text-zinc-200 py-2 border-b border-white/5 hover:text-gold-primary"
+            className="text-sm uppercase tracking-wider text-zinc-200 py-2 border-b border-white/10 hover:text-gold-primary"
           >
             Curated Properties
           </a>
           <a 
             href="#concierge" 
             onClick={() => setMobileMenuOpen(false)}
-            className="text-sm uppercase tracking-wider text-zinc-200 py-2 border-b border-white/5 hover:text-gold-primary"
+            className="text-sm uppercase tracking-wider text-zinc-200 py-2 border-b border-white/10 hover:text-gold-primary"
           >
             Private Concierge
           </a>
           <a 
             href="#stats" 
             onClick={() => setMobileMenuOpen(false)}
-            className="text-sm uppercase tracking-wider text-zinc-200 py-2 border-b border-white/5 hover:text-gold-primary"
+            className="text-sm uppercase tracking-wider text-zinc-200 py-2 border-b border-white/10 hover:text-gold-primary"
           >
             Market Intelligence
           </a>
@@ -137,7 +137,7 @@ export default function Navbar({
           <button 
             type="button"
             onClick={() => { setMobileMenuOpen(false); onOpenConsultation(); }}
-            className="w-full py-3 gold-gradient text-[#07080a] text-xs font-bold uppercase tracking-wider rounded-lg text-center mt-2 shadow-lg shadow-gold-primary/20 cursor-pointer"
+            className="w-full py-3 gold-gradient text-[#07080a] text-xs font-bold uppercase tracking-wider rounded-xl text-center mt-2 shadow-lg shadow-gold-primary/20 cursor-pointer border border-white/20"
           >
             Schedule Private Consultation
           </button>

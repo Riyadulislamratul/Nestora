@@ -21,16 +21,18 @@ export default function WishlistDrawer({
   }).format(totalPortfolioValue);
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm animate-fade-in" onClick={onClose}>
+    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md animate-fade-in" onClick={onClose}>
       <aside 
-        className="fixed top-0 right-0 bottom-0 w-full max-w-md z-50 glass-panel border-l border-gold-primary/30 flex flex-col shadow-2xl animate-slide-in"
+        className="fixed top-0 right-0 bottom-0 w-full max-w-md z-50 glass-panel !bg-[#07090e]/85 !backdrop-blur-2xl border-l border-gold-primary/40 flex flex-col shadow-2xl animate-slide-in"
         onClick={(e) => e.stopPropagation()}
         aria-label="Saved Residences Drawer"
       >
         {/* Drawer Header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 bg-[#0a0c11]/90">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-white/10 glass-panel !border-t-0 !border-x-0">
           <div className="flex items-center gap-3">
-            <Bookmark size={20} className="text-gold-primary" />
+            <div className="w-9 h-9 rounded-full glass-pill-gold flex items-center justify-center">
+              <Bookmark size={18} className="text-gold-primary" />
+            </div>
             <div>
               <h3 className="font-serif text-lg text-white font-medium">Curated Portfolio</h3>
               <p className="text-xs text-zinc-400">{savedProperties.length} Saved Residences</p>
@@ -40,10 +42,10 @@ export default function WishlistDrawer({
           <button 
             type="button" 
             onClick={onClose} 
-            className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 text-zinc-300 hover:text-white flex items-center justify-center transition-all cursor-pointer"
+            className="w-8 h-8 rounded-full glass-btn text-zinc-300 hover:text-white flex items-center justify-center transition-all cursor-pointer"
             aria-label="Close drawer"
           >
-            <X size={18} />
+            <X size={17} />
           </button>
         </div>
 
@@ -59,11 +61,11 @@ export default function WishlistDrawer({
                 }).format(property.price);
 
                 return (
-                  <div key={property.id} className="flex gap-3.5 p-3.5 rounded-xl glass-panel-gold border border-gold-primary/20">
+                  <div key={property.id} className="flex gap-3.5 p-3.5 rounded-2xl glass-card border border-white/15 hover:border-gold-primary/50">
                     <img 
                       src={property.images[0]} 
                       alt={property.title} 
-                      className="w-20 h-20 rounded-lg object-cover cursor-pointer shrink-0 hover:opacity-90 transition-opacity"
+                      className="w-20 h-20 rounded-xl object-cover cursor-pointer shrink-0 hover:opacity-90 transition-opacity"
                       onClick={() => {
                         onClose();
                         onSelectProperty(property);
@@ -106,7 +108,7 @@ export default function WishlistDrawer({
                           className="flex items-center gap-1 text-[11px] font-semibold text-zinc-300 hover:text-gold-primary transition-colors cursor-pointer"
                         >
                           <span>Explore</span>
-                          <ArrowRight size={12} />
+                          <ArrowRight size={12} className="text-gold-primary" />
                         </button>
                       </div>
                     </div>
@@ -127,7 +129,7 @@ export default function WishlistDrawer({
 
         {/* Drawer Footer Actions */}
         {savedProperties.length > 0 && (
-          <div className="p-5 border-t border-white/10 bg-[#0a0c11]/95 flex flex-col gap-3.5">
+          <div className="p-5 border-t border-white/10 glass-panel !border-x-0 !border-b-0 flex flex-col gap-3.5">
             <div className="flex justify-between items-baseline">
               <span className="text-[11px] uppercase tracking-wider text-zinc-400 font-semibold">Combined Portfolio</span>
               <span className="font-serif text-xl font-bold text-[#e2c057]">{formattedTotal}</span>
@@ -140,7 +142,7 @@ export default function WishlistDrawer({
                   onClose();
                   onOpenConsultation();
                 }}
-                className="w-full py-3 gold-gradient text-[#07080a] text-xs font-bold uppercase tracking-wider rounded-lg shadow-md shadow-gold-primary/20 hover:brightness-110 flex items-center justify-center gap-2 cursor-pointer transition-all"
+                className="w-full py-3 gold-gradient text-[#07080a] text-xs font-bold uppercase tracking-wider rounded-xl shadow-lg shadow-gold-primary/25 hover:brightness-110 flex items-center justify-center gap-2 cursor-pointer transition-all border border-white/20"
               >
                 <FileText size={15} />
                 <span>Request Comprehensive Dossier</span>
@@ -149,7 +151,7 @@ export default function WishlistDrawer({
               <button 
                 type="button" 
                 onClick={onClearAll}
-                className="text-xs text-zinc-500 hover:text-red-400 text-center py-1 transition-colors cursor-pointer"
+                className="text-xs text-zinc-400 hover:text-red-400 text-center py-1 transition-colors cursor-pointer"
               >
                 Clear Portfolio
               </button>
