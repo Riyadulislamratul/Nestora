@@ -17,68 +17,68 @@ export default function ConsultationModal({ isOpen, onClose }) {
   };
 
   return (
-    <div className="modal-backdrop animate-fade-in" onClick={onClose}>
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto animate-fade-in" onClick={onClose}>
       <div 
-        className="consultation-modal-container glass-panel animate-slide-up"
+        className="max-w-xl w-full rounded-2xl glass-panel border border-gold-primary/30 shadow-2xl overflow-hidden animate-slide-up"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="modal-header-bar">
-          <div className="modal-header-title">
-            <PhoneCall size={18} className="text-gold mr-2" />
+        <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 bg-[#0a0c11]/90">
+          <div className="flex items-center gap-2 text-sm font-semibold text-white">
+            <PhoneCall size={16} className="text-gold-primary" />
             <span>Private Office Confidential Inquiry</span>
           </div>
           <button 
             type="button" 
             onClick={onClose} 
-            className="modal-close-btn"
+            className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 text-zinc-300 hover:text-white flex items-center justify-center transition-all cursor-pointer"
             aria-label="Close"
           >
-            <X size={20} />
+            <X size={18} />
           </button>
         </div>
 
         {submitted ? (
-          <div className="tour-success-state animate-fade-in">
-            <div className="success-icon-wrap">
-              <CheckCircle size={48} className="text-gold" />
+          <div className="p-8 sm:p-10 text-center animate-fade-in">
+            <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-gold-primary/20 border border-gold-primary/40 flex items-center justify-center">
+              <CheckCircle size={32} className="text-gold-primary" />
             </div>
-            <h3 className="success-title">Inquiry Registered Confidentially</h3>
-            <p className="success-subtitle">
+            <h3 className="font-serif text-2xl text-white mb-2">Inquiry Registered Confidentially</h3>
+            <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
               Thank you, <strong>{name}</strong>. A Senior Managing Partner from our Private Office 
               will initiate contact through your encrypted or chosen channel within 2 hours.
             </p>
-            <div className="booking-summary-card glass-panel-gold">
-              <div className="summary-row">
-                <span className="summary-label">Target Allocation:</span>
-                <span className="summary-val">{budgetTier}</span>
+            <div className="p-4 rounded-xl glass-panel-gold border border-gold-primary/30 text-left flex flex-col gap-2.5 text-xs sm:text-sm mb-6">
+              <div className="flex justify-between">
+                <span className="text-zinc-400">Target Allocation:</span>
+                <span className="text-white font-semibold">{budgetTier}</span>
               </div>
-              <div className="summary-row">
-                <span className="summary-label">Preferred Enclave:</span>
-                <span className="summary-val">{locationPreference}</span>
+              <div className="flex justify-between">
+                <span className="text-zinc-400">Preferred Enclave:</span>
+                <span className="text-white font-semibold">{locationPreference}</span>
               </div>
-              <div className="summary-row">
-                <span className="summary-label">Client Code:</span>
-                <span className="summary-val">NST-PRV-{(Math.random()*90000 + 10000).toFixed(0)}</span>
+              <div className="flex justify-between">
+                <span className="text-zinc-400">Client Reference:</span>
+                <span className="text-white font-semibold">NST-PRV-{(Math.random()*90000 + 10000).toFixed(0)}</span>
               </div>
             </div>
             <button 
               type="button" 
               onClick={onClose} 
-              className="btn-gold-full mt-4"
+              className="w-full py-3 gold-gradient text-[#07080a] text-xs font-bold uppercase tracking-wider rounded-lg cursor-pointer hover:brightness-110"
             >
               Close
             </button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="schedule-tour-form">
-            <p className="consultation-intro-text">
+          <form onSubmit={handleSubmit} className="p-5 sm:p-7 flex flex-col gap-4">
+            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
               Direct access to our senior partners for off-market acquisitions, sovereign portfolio 
               divestitures, and private architectural commissions.
             </p>
 
-            <div className="form-group">
-              <label className="form-label">
-                <User size={14} className="text-gold" />
+            <div className="flex flex-col gap-1.5">
+              <label className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
+                <User size={13} className="text-gold-primary" />
                 <span>Client Name or Representative</span>
               </label>
               <input 
@@ -87,14 +87,14 @@ export default function ConsultationModal({ isOpen, onClose }) {
                 placeholder="Lord / Lady / Dr. / Ambassador"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="form-input"
+                className="w-full px-3.5 py-2.5 bg-black/60 border border-white/10 rounded-lg text-white text-xs sm:text-sm focus:border-gold-primary outline-none transition-colors placeholder:text-zinc-600"
               />
             </div>
 
-            <div className="form-row-2">
-              <div className="form-group">
-                <label className="form-label">
-                  <Mail size={14} className="text-gold" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div className="flex flex-col gap-1.5">
+                <label className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
+                  <Mail size={13} className="text-gold-primary" />
                   <span>Confidential Email</span>
                 </label>
                 <input 
@@ -103,14 +103,14 @@ export default function ConsultationModal({ isOpen, onClose }) {
                   placeholder="advisor@familyoffice.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="form-input"
+                  className="w-full px-3.5 py-2.5 bg-black/60 border border-white/10 rounded-lg text-white text-xs sm:text-sm focus:border-gold-primary outline-none transition-colors placeholder:text-zinc-600"
                 />
               </div>
 
-              <div className="form-group">
-                <label className="form-label">
-                  <Phone size={14} className="text-gold" />
-                  <span>Direct Signal / Mobile</span>
+              <div className="flex flex-col gap-1.5">
+                <label className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
+                  <Phone size={13} className="text-gold-primary" />
+                  <span>Direct Contact Phone</span>
                 </label>
                 <input 
                   type="tel" 
@@ -118,53 +118,53 @@ export default function ConsultationModal({ isOpen, onClose }) {
                   placeholder="+1 (555) 019-2834"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="form-input"
+                  className="w-full px-3.5 py-2.5 bg-black/60 border border-white/10 rounded-lg text-white text-xs sm:text-sm focus:border-gold-primary outline-none transition-colors placeholder:text-zinc-600"
                 />
               </div>
             </div>
 
-            <div className="form-row-2">
-              <div className="form-group">
-                <label className="form-label">
-                  <Building2 size={14} className="text-gold" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div className="flex flex-col gap-1.5">
+                <label className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
+                  <Building2 size={13} className="text-gold-primary" />
                   <span>Target Region</span>
                 </label>
                 <select 
                   value={locationPreference}
                   onChange={(e) => setLocationPreference(e.target.value)}
-                  className="form-select"
+                  className="w-full px-3.5 py-2.5 bg-black/60 border border-white/10 rounded-lg text-white text-xs sm:text-sm focus:border-gold-primary outline-none transition-colors cursor-pointer"
                 >
-                  <option value="Los Angeles / California Coast">Los Angeles / California Coast</option>
-                  <option value="Manhattan & Hamptons">Manhattan & Hamptons</option>
-                  <option value="Miami & Palm Beach Waterfront">Miami & Palm Beach Waterfront</option>
-                  <option value="Aspen & Rocky Mountains">Aspen & Rocky Mountains</option>
-                  <option value="London & UK Country Estates">London & UK Country Estates</option>
-                  <option value="French Riviera & Lake Como">French Riviera & Lake Como</option>
-                  <option value="Tokyo & Kyoto Heritage">Tokyo & Kyoto Heritage</option>
+                  <option value="Los Angeles / California Coast" className="bg-[#11131a]">Los Angeles / California Coast</option>
+                  <option value="Manhattan & Hamptons" className="bg-[#11131a]">Manhattan & Hamptons</option>
+                  <option value="Miami & Palm Beach Waterfront" className="bg-[#11131a]">Miami & Palm Beach</option>
+                  <option value="Aspen & Rocky Mountains" className="bg-[#11131a]">Aspen & Rocky Mountains</option>
+                  <option value="London & UK Country Estates" className="bg-[#11131a]">London & UK Country</option>
+                  <option value="French Riviera & Lake Como" className="bg-[#11131a]">French Riviera & Lake Como</option>
+                  <option value="Tokyo & Kyoto Heritage" className="bg-[#11131a]">Tokyo & Kyoto Heritage</option>
                 </select>
               </div>
 
-              <div className="form-group">
-                <label className="form-label">Capital Allocation Tier</label>
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Allocation Tier</label>
                 <select 
                   value={budgetTier}
                   onChange={(e) => setBudgetTier(e.target.value)}
-                  className="form-select"
+                  className="w-full px-3.5 py-2.5 bg-black/60 border border-white/10 rounded-lg text-white text-xs sm:text-sm focus:border-gold-primary outline-none transition-colors cursor-pointer"
                 >
-                  <option value="$10M - $20M">$10M - $20M</option>
-                  <option value="$20M - $40M">$20M - $40M</option>
-                  <option value="$40M - $75M">$40M - $75M</option>
-                  <option value="$75M+ Trophy Assets">$75M+ Trophy Assets</option>
+                  <option value="$10M - $20M" className="bg-[#11131a]">$10M - $20M</option>
+                  <option value="$20M - $40M" className="bg-[#11131a]">$20M - $40M</option>
+                  <option value="$40M - $75M" className="bg-[#11131a]">$40M - $75M</option>
+                  <option value="$75M+ Trophy Assets" className="bg-[#11131a]">$75M+ Trophy Assets</option>
                 </select>
               </div>
             </div>
 
-            <div className="discreet-notice">
-              <ShieldCheck size={16} className="text-gold mr-2 flex-shrink-0" />
+            <div className="flex items-center gap-2.5 bg-gold-primary/10 border border-gold-primary/30 rounded-lg p-3 text-xs text-gold-light">
+              <ShieldCheck size={16} className="text-gold-primary shrink-0" />
               <span>Strict fiduciary confidentiality. All communications are end-to-end encrypted.</span>
             </div>
 
-            <button type="submit" className="btn-gold-submit">
+            <button type="submit" className="w-full py-3.5 gold-gradient text-[#07080a] text-xs sm:text-sm font-bold uppercase tracking-wider rounded-lg shadow-md shadow-gold-primary/30 hover:brightness-110 transition-all cursor-pointer">
               Initiate Discreet Advisory Connection
             </button>
           </form>

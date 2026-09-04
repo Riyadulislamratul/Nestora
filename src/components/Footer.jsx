@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, ArrowRight, Shield, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
 export default function Footer({ onOpenConsultation, onOpenMortgage }) {
   const [email, setEmail] = useState('');
@@ -17,42 +17,49 @@ export default function Footer({ onOpenConsultation, onOpenMortgage }) {
   };
 
   return (
-    <footer className="luxury-footer">
-      <div className="footer-top-container">
-        <div className="footer-brand-col">
-          <div className="brand-logo mb-4">
-            <span className="brand-mark">N</span>
-            <div className="brand-text-group">
-              <span className="brand-name">NESTORA</span>
-              <span className="brand-tagline">PRIVATE ESTATES</span>
+    <footer className="bg-[#040507] border-t border-white/10 pt-16 pb-8 mt-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 pb-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10">
+        {/* Brand Column */}
+        <div className="lg:col-span-2 flex flex-col gap-4">
+          <div className="flex items-center gap-3">
+            <span className="w-8 h-8 rounded-lg gold-gradient text-[#07080a] flex items-center justify-center font-serif font-bold text-lg">
+              N
+            </span>
+            <div className="flex flex-col">
+              <span className="font-serif text-lg font-semibold tracking-widest text-white leading-none">
+                NESTORA
+              </span>
+              <span className="text-[8px] tracking-[0.26em] text-gold-primary font-semibold mt-0.5">
+                PRIVATE ESTATES
+              </span>
             </div>
           </div>
 
-          <p className="footer-brand-mission">
+          <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed max-w-sm">
             Nestora is the premier international brokerage representing singular architectural 
             estates, historic palazzos, and modern penthouses for the world's most discerning individuals.
           </p>
 
-          <div className="footer-newsletter-wrap">
-            <span className="newsletter-title">The Nestora Gazette</span>
-            <p className="newsletter-sub">Receive confidential notifications for newly vetted off-market inventory.</p>
+          <div className="mt-2">
+            <span className="font-serif text-sm font-semibold text-white block mb-1">The Nestora Gazette</span>
+            <p className="text-xs text-zinc-400 mb-3">Receive confidential notifications for newly vetted off-market inventory.</p>
             {subscribed ? (
-              <div className="subscribed-msg">
-                <CheckCircle2 size={16} className="text-gold" />
+              <div className="flex items-center gap-2 text-xs text-gold-primary">
+                <CheckCircle2 size={15} />
                 <span>You have been added to our private register.</span>
               </div>
             ) : (
-              <form onSubmit={handleSubscribe} className="newsletter-form">
+              <form onSubmit={handleSubscribe} className="flex max-w-xs">
                 <input 
                   type="email" 
                   required
                   placeholder="Enter confidential email..." 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="newsletter-input"
+                  className="flex-1 px-3.5 py-2 bg-white/5 border border-white/10 rounded-l-md text-white text-xs outline-none focus:border-gold-primary transition-colors placeholder:text-zinc-500"
                 />
-                <button type="submit" className="newsletter-btn" aria-label="Subscribe">
-                  <ArrowRight size={16} />
+                <button type="submit" className="px-4 gold-gradient text-[#07080a] rounded-r-md flex items-center justify-center cursor-pointer hover:brightness-110" aria-label="Subscribe">
+                  <ArrowRight size={15} />
                 </button>
               </form>
             )}
@@ -60,56 +67,52 @@ export default function Footer({ onOpenConsultation, onOpenMortgage }) {
         </div>
 
         {/* Global Hubs */}
-        <div className="footer-links-col">
-          <h4 className="footer-col-title">Global Private Hubs</h4>
-          <ul className="footer-list">
-            <li><strong>Beverly Hills</strong> &mdash; 9601 Wilshire Blvd, CA</li>
-            <li><strong>Manhattan</strong> &mdash; 590 Madison Ave, NY</li>
-            <li><strong>Mayfair London</strong> &mdash; 14 Berkeley Square, W1J</li>
-            <li><strong>Milan</strong> &mdash; Via Montenapoleone 8</li>
-            <li><strong>Tokyo</strong> &mdash; Ginza Six, Chuo-ku</li>
-            <li><strong>Lake Como</strong> &mdash; Villa d'Este Promenade</li>
+        <div>
+          <h4 className="font-serif text-sm font-semibold text-white mb-4 uppercase tracking-wider">Global Hubs</h4>
+          <ul className="flex flex-col gap-2.5 text-xs text-zinc-400">
+            <li><strong className="text-zinc-200">Beverly Hills</strong> &mdash; 9601 Wilshire Blvd</li>
+            <li><strong className="text-zinc-200">Manhattan</strong> &mdash; 590 Madison Ave</li>
+            <li><strong className="text-zinc-200">Mayfair</strong> &mdash; 14 Berkeley Square</li>
+            <li><strong className="text-zinc-200">Milan</strong> &mdash; Via Montenapoleone 8</li>
+            <li><strong className="text-zinc-200">Tokyo</strong> &mdash; Ginza Six, Chuo-ku</li>
+            <li><strong className="text-zinc-200">Como</strong> &mdash; Villa d'Este Promenade</li>
           </ul>
         </div>
 
         {/* Portfolios */}
-        <div className="footer-links-col">
-          <h4 className="footer-col-title">Curated Portfolios</h4>
-          <ul className="footer-list">
-            <li><a href="#featured-listings">Penthouses & Sky Mansions</a></li>
-            <li><a href="#featured-listings">Modern Architectural Villas</a></li>
-            <li><a href="#featured-listings">Private Waterfront Compounds</a></li>
-            <li><a href="#featured-listings">Alpine Ski-in / Ski-out Chalets</a></li>
-            <li><a href="#featured-listings">Historic European Palazzos</a></li>
-            <li><a href="#featured-listings">Private Islands & Vineyards</a></li>
+        <div>
+          <h4 className="font-serif text-sm font-semibold text-white mb-4 uppercase tracking-wider">Portfolios</h4>
+          <ul className="flex flex-col gap-2.5 text-xs text-zinc-400">
+            <li><a href="#featured-listings" className="hover:text-gold-primary transition-colors">Penthouses & Sky Mansions</a></li>
+            <li><a href="#featured-listings" className="hover:text-gold-primary transition-colors">Modern Architectural Villas</a></li>
+            <li><a href="#featured-listings" className="hover:text-gold-primary transition-colors">Private Waterfront Compounds</a></li>
+            <li><a href="#featured-listings" className="hover:text-gold-primary transition-colors">Alpine Ski-in / Ski-out</a></li>
+            <li><a href="#featured-listings" className="hover:text-gold-primary transition-colors">Historic European Palazzos</a></li>
+            <li><a href="#featured-listings" className="hover:text-gold-primary transition-colors">Private Islands & Vineyards</a></li>
           </ul>
         </div>
 
         {/* Private Office Services */}
-        <div className="footer-links-col">
-          <h4 className="footer-col-title">Bespoke Advisory</h4>
-          <ul className="footer-list">
-            <li><button onClick={onOpenConsultation} className="footer-link-btn">Off-Market Acquisitions</button></li>
-            <li><button onClick={onOpenConsultation} className="footer-link-btn">Architectural Provenance Advisory</button></li>
-            <li><button onClick={onOpenMortgage} className="footer-link-btn">Jumbo Financing Analytics</button></li>
-            <li><button onClick={onOpenConsultation} className="footer-link-btn">Family Office Portfolio Audit</button></li>
-            <li><button onClick={onOpenConsultation} className="footer-link-btn">Aviation & Yachting Liaison</button></li>
+        <div>
+          <h4 className="font-serif text-sm font-semibold text-white mb-4 uppercase tracking-wider">Bespoke Advisory</h4>
+          <ul className="flex flex-col gap-2.5 text-xs text-zinc-400">
+            <li><button onClick={onOpenConsultation} className="hover:text-gold-primary transition-colors text-left cursor-pointer">Off-Market Acquisitions</button></li>
+            <li><button onClick={onOpenConsultation} className="hover:text-gold-primary transition-colors text-left cursor-pointer">Architectural Provenance</button></li>
+            <li><button onClick={onOpenMortgage} className="hover:text-gold-primary transition-colors text-left cursor-pointer">Jumbo Financing Analytics</button></li>
+            <li><button onClick={onOpenConsultation} className="hover:text-gold-primary transition-colors text-left cursor-pointer">Family Office Portfolio Audit</button></li>
+            <li><button onClick={onOpenConsultation} className="hover:text-gold-primary transition-colors text-left cursor-pointer">Aviation & Yachting Liaison</button></li>
           </ul>
         </div>
       </div>
 
-      <div className="footer-bottom-container">
-        <div className="footer-bottom-content">
-          <p className="copyright-text">
-            &copy; {new Date().getFullYear()} NESTORA PRIVATE ESTATES LLC. All Rights Reserved. Equal Housing Opportunity.
-          </p>
-          <div className="footer-legal-tags">
-            <span>Discreet Fiduciary Brokerage</span>
-            <span className="divider-dot">•</span>
-            <span>Strict NDA Protocol</span>
-            <span className="divider-dot">•</span>
-            <span>Global Real Estate License #0192844</span>
-          </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 text-[11px] text-zinc-500">
+        <p>&copy; {new Date().getFullYear()} NESTORA PRIVATE ESTATES LLC. All Rights Reserved. Equal Housing Opportunity.</p>
+        <div className="flex items-center gap-3">
+          <span>Discreet Fiduciary Brokerage</span>
+          <span>•</span>
+          <span>Strict NDA Protocol</span>
+          <span>•</span>
+          <span>License #0192844</span>
         </div>
       </div>
     </footer>

@@ -11,8 +11,7 @@ import ConciergeSection from './components/ConciergeSection';
 import ConsultationModal from './components/ConsultationModal';
 import Footer from './components/Footer';
 import { PROPERTIES } from './data/properties';
-import { Bookmark, CheckCircle2 } from 'lucide-react';
-import './App.css';
+import { CheckCircle2 } from 'lucide-react';
 
 const DEFAULT_FILTERS = {
   status: 'All',
@@ -129,11 +128,11 @@ export default function App() {
   };
 
   return (
-    <div className="nestora-app">
+    <div className="min-h-screen flex flex-col bg-[#07080a] relative overflow-x-hidden text-zinc-100 selection:bg-gold-primary/30 selection:text-white">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="toast-notification animate-fade-in">
-          <CheckCircle2 size={16} className="text-gold" />
+        <div className="fixed bottom-6 right-6 z-50 bg-[#0d1017]/95 backdrop-blur-md border border-gold-primary/50 rounded-xl px-4 py-3 flex items-center gap-2.5 text-xs sm:text-sm text-white shadow-2xl animate-fade-in">
+          <CheckCircle2 size={16} className="text-gold-primary shrink-0" />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -155,7 +154,7 @@ export default function App() {
       />
 
       {/* Featured Property Grid */}
-      <main className="main-content-wrapper">
+      <main className="max-w-7xl mx-auto px-4 sm:px-8 pb-20 w-full flex-1">
         <PropertyGrid 
           properties={filteredProperties}
           savedIds={savedIds}
