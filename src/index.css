@@ -37,6 +37,16 @@ body {
   position: relative;
 }
 
+/* Hide native cursor on desktop to give way to luxury custom cursor */
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  a, button, input, select, textarea, [role="button"], label, .cursor-pointer {
+    cursor: none !important;
+  }
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -184,6 +194,12 @@ h1, h2, h3, h4, .font-serif {
   }
   to {
     transform: translateX(0);
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
   }
 }
 

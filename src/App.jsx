@@ -10,6 +10,8 @@ import StatsSection from './components/StatsSection';
 import ConciergeSection from './components/ConciergeSection';
 import ConsultationModal from './components/ConsultationModal';
 import Footer from './components/Footer';
+import CustomCursor from './components/CustomCursor';
+import Loader from './components/Loader';
 import { PROPERTIES } from './data/properties';
 import { CheckCircle2 } from 'lucide-react';
 
@@ -23,6 +25,7 @@ const DEFAULT_FILTERS = {
 };
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState(DEFAULT_FILTERS);
   const [activeCategory, setActiveCategory] = useState('all');
   const [selectedProperty, setSelectedProperty] = useState(null);
@@ -129,6 +132,12 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#060709] relative overflow-x-hidden text-zinc-100 selection:bg-gold-primary/30 selection:text-white">
+      {/* Luxury Initial Page Loader */}
+      {isLoading && <Loader onFinish={() => setIsLoading(false)} />}
+
+      {/* Smooth Trailing Custom Cursor */}
+      <CustomCursor />
+
       {/* Ambient Aurora Glow Nodes for True Glass Refraction */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         {/* Top Gold Amber Orb */}
