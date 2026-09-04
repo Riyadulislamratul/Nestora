@@ -38,38 +38,44 @@ export default function PropertyGrid({
   });
 
   return (
-    <section id="featured-listings" className="property-grid-section">
-      <div className="section-header-row">
+    <section id="featured-listings" className="py-12 sm:py-16">
+      <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
         <div>
-          <span className="section-eyebrow">CURATED PORTFOLIO</span>
-          <h2 className="section-title">
+          <span className="text-[11px] tracking-[0.22em] text-gold-primary font-bold uppercase block mb-1.5">
+            CURATED PORTFOLIO
+          </span>
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-white font-medium">
             Featured <span className="gold-text">Trophy Residences</span>
           </h2>
         </div>
 
         {/* Sorting Dropdown */}
-        <div className="sort-dropdown-wrapper">
-          <ArrowUpDown size={15} className="sort-icon" />
+        <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3.5 py-2 text-xs sm:text-sm text-zinc-200">
+          <ArrowUpDown size={14} className="text-gold-primary shrink-0" />
           <select 
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value)}
-            className="sort-select"
+            className="bg-transparent border-none text-zinc-300 text-xs sm:text-sm outline-none cursor-pointer"
           >
-            <option value="featured">Sort: Featured Curation</option>
-            <option value="price-desc">Price: High to Low</option>
-            <option value="price-asc">Price: Low to High</option>
-            <option value="sqft-desc">Interior Size: Largest First</option>
+            <option value="featured" className="bg-[#11131a] text-white">Sort: Featured Curation</option>
+            <option value="price-desc" className="bg-[#11131a] text-white">Price: High to Low</option>
+            <option value="price-asc" className="bg-[#11131a] text-white">Price: Low to High</option>
+            <option value="sqft-desc" className="bg-[#11131a] text-white">Interior Size: Largest First</option>
           </select>
         </div>
       </div>
 
       {/* Category Pills Bar */}
-      <div className="category-tabs-bar">
+      <div className="flex gap-2 overflow-x-auto pb-3 mb-8 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         {categories.map(cat => (
           <button
             key={cat.value}
             type="button"
-            className={`category-tab-btn ${activeCategory === cat.value ? 'active' : ''}`}
+            className={`whitespace-nowrap px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all cursor-pointer ${
+              activeCategory === cat.value 
+                ? 'bg-gold-primary/20 border border-gold-primary text-gold-primary font-semibold shadow-sm shadow-gold-primary/20' 
+                : 'bg-white/5 border border-white/10 text-zinc-400 hover:text-white hover:border-white/20'
+            }`}
             onClick={() => setActiveCategory(cat.value)}
           >
             {cat.label}
@@ -79,7 +85,7 @@ export default function PropertyGrid({
 
       {/* Grid of Properties */}
       {sortedProperties.length > 0 ? (
-        <div className="property-cards-grid">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
           {sortedProperties.map(property => (
             <PropertyCard
               key={property.id}
@@ -92,19 +98,19 @@ export default function PropertyGrid({
           ))}
         </div>
       ) : (
-        <div className="empty-results-state glass-panel">
-          <Building2 size={48} className="empty-icon text-gold" />
-          <h3 className="empty-title">No Residences Match These Filters</h3>
-          <p className="empty-desc">
+        <div className="p-10 sm:p-14 rounded-2xl glass-panel text-center max-w-lg mx-auto flex flex-col items-center my-8 border border-white/10">
+          <Building2 size={44} className="text-gold-primary mb-4" />
+          <h3 className="font-serif text-xl sm:text-2xl text-white mb-2">No Residences Match These Filters</h3>
+          <p className="text-xs sm:text-sm text-zinc-400 mb-6 leading-relaxed">
             We couldn’t find any trophy estates matching your exact criteria. 
             Adjust your price range, destination, or bedroom filters.
           </p>
           <button 
             type="button" 
             onClick={onResetFilters} 
-            className="btn-reset-large"
+            className="inline-flex items-center gap-2 px-6 py-2.5 gold-gradient text-[#07080a] text-xs sm:text-sm font-bold uppercase tracking-wider rounded-md cursor-pointer hover:brightness-110 shadow-md shadow-gold-primary/25"
           >
-            <RotateCcw size={16} />
+            <RotateCcw size={15} />
             <span>Reset All Search Filters</span>
           </button>
         </div>

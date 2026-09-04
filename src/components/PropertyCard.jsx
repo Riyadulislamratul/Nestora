@@ -15,10 +15,10 @@ export default function PropertyCard({
   }).format(property.status === 'For Rent' && property.monthlyRent ? property.monthlyRent : property.price);
 
   return (
-    <article className="property-card glass-panel group">
+    <article className="group relative rounded-2xl overflow-hidden flex flex-col glass-panel border border-white/10 hover:border-gold-primary/50 transition-all duration-300 hover:-translate-y-1.5 shadow-xl hover:shadow-2xl hover:shadow-black/70">
       {/* Image Container */}
       <div 
-        className="card-media-wrapper"
+        className="relative aspect-[16/10] overflow-hidden cursor-pointer"
         onClick={() => onSelectProperty(property)}
         role="button"
         tabIndex={0}
@@ -29,16 +29,20 @@ export default function PropertyCard({
           src={property.images[0]} 
           alt={property.title} 
           loading="lazy"
-          className="card-image"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        <div className="card-gradient-overlay"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
 
         {/* Top Badges */}
-        <div className="card-top-tags">
-          <span className={`badge-pill ${property.badge === 'Exclusive' ? 'badge-gold' : 'badge-dark'}`}>
+        <div className="absolute top-3.5 left-3.5 flex gap-2">
+          <span className={`px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase ${
+            property.badge === 'Exclusive' 
+              ? 'gold-gradient text-[#07080a]' 
+              : 'bg-black/75 backdrop-blur-md text-white border border-white/10'
+          }`}>
             {property.badge}
           </span>
-          <span className="badge-pill badge-status">
+          <span className="px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase bg-black/60 backdrop-blur-md text-zinc-300 border border-white/10">
             {property.status}
           </span>
         </div>
@@ -50,73 +54,79 @@ export default function PropertyCard({
             e.stopPropagation();
             onToggleSave(property.id);
           }}
-          className={`card-bookmark-btn ${isSaved ? 'saved' : ''}`}
+          className={`absolute top-3.5 right-3.5 w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-md border transition-all cursor-pointer ${
+            isSaved 
+              ? 'bg-gold-primary text-[#07080a] border-gold-primary shadow-md shadow-gold-primary/50' 
+              : 'bg-black/60 text-white border-white/10 hover:bg-gold-primary hover:text-[#07080a] hover:border-gold-primary'
+          }`}
           aria-label={isSaved ? "Remove from saved properties" : "Save property"}
           title={isSaved ? "Remove from saved properties" : "Save to wishlist"}
         >
-          <Bookmark size={18} fill={isSaved ? "currentColor" : "none"} />
+          <Bookmark size={16} fill={isSaved ? "currentColor" : "none"} />
         </button>
 
         {/* Quick View Hover Hint */}
-        <div className="card-hover-hint">
-          <span>View Estate Details</span>
-          <ArrowUpRight size={16} />
+        <div className="absolute bottom-3.5 right-3.5 flex items-center gap-1 text-[11px] font-semibold text-white bg-black/75 backdrop-blur-md px-2.5 py-1 rounded border border-white/10 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all">
+          <span>View Estate</span>
+          <ArrowUpRight size={14} />
         </div>
       </div>
 
       {/* Card Content Details */}
-      <div className="card-body">
+      <div className="p-5 sm:p-6 flex flex-col flex-1">
         {/* Price & Actions Row */}
-        <div className="card-price-row">
-          <div className="price-tag">
-            <span className="price-value">{formattedPrice}</span>
+        <div className="flex items-center justify-between mb-2.5">
+          <div className="flex items-baseline gap-1">
+            <span className="font-serif text-xl sm:text-2xl font-semibold text-[#e2c057]">
+              {formattedPrice}
+            </span>
             {property.status === 'For Rent' && (
-              <span className="price-period">/ month</span>
+              <span className="text-xs text-zinc-400">/mo</span>
             )}
           </div>
 
           <button 
             type="button" 
             onClick={() => onCalculateMortgage(property)}
-            className="calc-shortcut-btn"
+            className="flex items-center gap-1.5 text-[11px] text-zinc-400 hover:text-gold-primary px-2.5 py-1 rounded bg-white/5 border border-white/10 hover:border-gold-primary/40 transition-all cursor-pointer"
             title="Calculate estimated monthly mortgage"
           >
-            <Calculator size={15} />
+            <Calculator size={13} />
             <span>Financing</span>
           </button>
         </div>
 
         {/* Title and Address */}
         <h3 
-          className="card-title" 
+          className="font-serif text-lg font-semibold text-white hover:text-gold-primary transition-colors cursor-pointer line-clamp-1 mb-1.5" 
           onClick={() => onSelectProperty(property)}
         >
           {property.title}
         </h3>
 
-        <div className="card-location">
-          <MapPin size={14} className="location-icon" />
-          <span>{property.location}</span>
+        <div className="flex items-center gap-1.5 text-xs text-zinc-400 mb-2.5">
+          <MapPin size={13} className="text-gold-primary shrink-0" />
+          <span className="truncate">{property.location}</span>
         </div>
 
-        <p className="card-excerpt">
+        <p className="text-xs text-zinc-400 line-clamp-2 leading-relaxed mb-4">
           {property.subtitle}
         </p>
 
         {/* Specs Bar: Bed, Bath, Sqft */}
-        <div className="card-specs-bar">
-          <div className="spec-item" title={`${property.bedrooms} Bedrooms`}>
-            <Bed size={15} className="spec-icon" />
+        <div className="mt-auto pt-3.5 border-t border-white/10 flex items-center justify-between text-xs text-zinc-300">
+          <div className="flex items-center gap-1.5" title={`${property.bedrooms} Bedrooms`}>
+            <Bed size={14} className="text-gold-primary" />
             <span><strong>{property.bedrooms}</strong> Beds</span>
           </div>
-          <div className="spec-divider"></div>
-          <div className="spec-item" title={`${property.bathrooms} Bathrooms`}>
-            <Bath size={15} className="spec-icon" />
+          <div className="w-px h-3.5 bg-white/10"></div>
+          <div className="flex items-center gap-1.5" title={`${property.bathrooms} Bathrooms`}>
+            <Bath size={14} className="text-gold-primary" />
             <span><strong>{property.bathrooms}</strong> Baths</span>
           </div>
-          <div className="spec-divider"></div>
-          <div className="spec-item" title={`${property.sqft.toLocaleString()} Square Feet`}>
-            <Maximize2 size={15} className="spec-icon" />
+          <div className="w-px h-3.5 bg-white/10"></div>
+          <div className="flex items-center gap-1.5" title={`${property.sqft.toLocaleString()} Square Feet`}>
+            <Maximize2 size={14} className="text-gold-primary" />
             <span><strong>{property.sqft.toLocaleString()}</strong> sqft</span>
           </div>
         </div>
